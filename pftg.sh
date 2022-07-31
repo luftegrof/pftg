@@ -20,15 +20,16 @@
 #  ./pftg.sh 192.0.2.4
 
 LOG_PATH="${HOME}/pftg_${1}.log"
+PROBE_SIZE="1472"
 
-/bin/ping -q -n -i 0.2 -W 0.2 -s 1472 -c 10 -w 2 -O ${1}
+/bin/ping -q -n -i 0.2 -W 0.2 -s ${PROBE_SIZE} -c 10 -w 2 -O ${1}
 if [ $? -eq 0 ]; then
         exit 0
 elif [ $? -eq 1 ]; then
         printf "%s\n" "Loss detected. Executing traceroute."
         printf "\n" | tee -a ${LOG_PATH}
         printf "%s\n" "$(date) $(date +'%s')" "Packet Loss Detected in the path to ${1}.  Tracing the route." | tee -a ${LOG_PATH}
-        /usr/bin/traceroute -m 15 -q 10 -w 1 ${1} | tee -a ${LOG_PATH}
+        /usr/bin/traceroute -m 15 -q 10 -w 1 ${1} ${PROBE_SIZE} | tee -a ${LOG_PATH}
         printf "\n" | tee -a ${LOG_PATH}
         exit 1
 else
