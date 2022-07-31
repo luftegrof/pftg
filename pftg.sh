@@ -1,5 +1,7 @@
 #!/bin/bash
 #
+# Ping Fail Trace Get (PFTG)
+#
 # Copyright 2022, luftegrof at duck dot com
 #
 # Licensed under GPL Version 3
