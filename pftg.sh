@@ -23,13 +23,15 @@ LOG_PATH="${HOME}/pftg_${1}.log"
 
 /bin/ping -q -n -i 0.2 -W 0.2 -s 1472 -c 10 -w 2 -O ${1}
 if [ $? -eq 0 ]; then
-        exit
+        exit 0
 elif [ $? -eq 1 ]; then
         printf "%s\n" "Loss detected. Executing traceroute."
         printf "\n" | tee -a ${LOG_PATH}
         printf "%s\n" "$(date) $(date +'%s')" "Packet Loss Detected in the path to ${1}.  Tracing the route." | tee -a ${LOG_PATH}
         /usr/bin/traceroute -m 15 -q 10 -w 1 ${1} | tee -a ${LOG_PATH}
         printf "\n" | tee -a ${LOG_PATH}
+        exit 1
 else
         printf "%s\n" "Unrecognized exit code from ping.  Does not compute."
+        exit 2
 fi
