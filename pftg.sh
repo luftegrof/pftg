@@ -14,7 +14,7 @@
 #   - If 10 responses haven't been received within 2 seconds, it exits with code 1.
 #
 #  Usage:
-#  ./pftg.sh [ip_address]
+#  ./pftg.sh <ip_address>
 #
 #  Example:
 #  ./pftg.sh 192.0.2.4
