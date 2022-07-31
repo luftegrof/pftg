@@ -13,7 +13,7 @@
 #   - It sends 10 probes.
 #   - If 10 responses haven't been received within 2 seconds, it exits with code 1.
 
-/bin/ping -q -n -i 0.2 -W 0.2 -s 1000 -c 10 -w 2 -O ${1}
+/bin/ping -q -n -i 0.2 -W 0.2 -s 1472 -c 10 -w 2 -O ${1}
 if [ $? -eq 0 ]; then
         exit
 elif [ $? -eq 1 ]; then
